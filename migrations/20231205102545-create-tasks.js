@@ -26,6 +26,10 @@ module.exports = {
       date_final: {
         type: Sequelize.DATE
       },
+      ativo: {
+        defaultValue: 1,
+        type: Sequelize.INTEGER
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {

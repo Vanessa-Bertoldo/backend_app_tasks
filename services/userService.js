@@ -20,6 +20,31 @@ class UserService{
         
     }
 
+    /*async getUserAndTasks(id){
+        try{
+            const data = await database.USER.findAll({
+                include: [
+                    {
+                        model: database.TASKS,
+                        as: "TASKS",
+                        attributes: ['matricula', 'data', 'modo_pagamento', 'valor_pago', 'tamanho'],
+                        where: {
+                            data: {
+                                [Op.between]: [dto.dataInicial, dto.dataFinal]
+                            },
+                            modo_pagamento: dto.modo_pagamento
+                        }
+                    },
+                ],
+                where: {
+                    id: id
+                }
+            })
+        } catch(error) {
+            throw new Error("Usuario não cadastrado")
+        }
+    }*/
+
     async insertData(dto){
         const user = await database.USER.findOne({
             where: {
