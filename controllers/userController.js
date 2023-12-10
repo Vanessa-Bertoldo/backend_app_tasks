@@ -4,10 +4,10 @@ const userService = new UserService()
 
 class UserController{
     static async register(req, res){
-        const { name, email, user, password } = req.body
+        const { name, email, password } = req.body
 
         try{
-            const newUser = await userService.insertData({ name, email, user, password })
+            const newUser = await userService.insertData({ name, email, password })
             return res.status(200).send(newUser)
         } catch (erro) {
             return res.status(400).send({ message: erro.message })

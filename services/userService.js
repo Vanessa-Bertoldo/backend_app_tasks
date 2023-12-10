@@ -60,7 +60,6 @@ class UserService{
             const newUser = await database.USER.create({
                 name:       dto.name,
                 email:      dto.email,
-                user:       dto.user,
                 password:   dto.password
             })
             return newUser
