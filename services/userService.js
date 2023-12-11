@@ -29,6 +29,8 @@ class UserService{
         
     }
 
+    
+
     async insertData(dto){
         const user = await database.USER.findOne({
             where: {

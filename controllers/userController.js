@@ -23,16 +23,8 @@ class UserController{
         }
     }
 
-    static async searchDataById(req, res){
-        const { id } = req.params
-        console.log("id invocado ", id)
-        try{
-            const user = await userService.getDataById(id)
-            res.status(200).json(user)
-        } catch(error) {
-            res.status(400).json({message: error.message})
-        }
-    }
+    
+
 
     static async deleteUser(req, res){
         const { id } = req.params
