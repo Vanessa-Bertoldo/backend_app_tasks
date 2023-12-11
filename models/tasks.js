@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      TASKS.belongsTo(models.USER, { as:"user", foreignKey: 'user_id' });
+      //TASKS.belongsTo(models.USER, { as:"user", foreignKey: 'id' });
+      TASKS.belongsTo(models.USER, { as: "user", foreignKey: 'user_id' });
     }
   }
   TASKS.init({
@@ -24,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'TASKS',
-   
   });
   return TASKS;
 };

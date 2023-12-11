@@ -9,41 +9,25 @@ class UserService{
     async getDataById(id){
         try{
             const user = await database.USER.findOne({
-                where: {
-                    id: id
-                }
+                where: { 
+                    id: id 
+                },
+                include: [
+                    { 
+                        model: database.TASKS, 
+                        as: 'tasks',
+                        attributes: ['id', 'title', 'description', 'status', 'date_initial', 'date_final'], 
+                    }
+                ]
+                
             })
+            console.log("Socorro ", user)
             return user
         } catch(error) {
-            throw new Error("Erro ao buscar usuario")
+            throw new Error(error)
         }
         
     }
-
-    /*async getUserAndTasks(id){
-        try{
-            const data = await database.USER.findAll({
-                include: [
-                    {
-                        model: database.TASKS,
-                        as: "TASKS",
-                        attributes: ['matricula', 'data', 'modo_pagamento', 'valor_pago', 'tamanho'],
-                        where: {
-                            data: {
-                                [Op.between]: [dto.dataInicial, dto.dataFinal]
-                            },
-                            modo_pagamento: dto.modo_pagamento
-                        }
-                    },
-                ],
-                where: {
-                    id: id
-                }
-            })
-        } catch(error) {
-            throw new Error("Usuario não cadastrado")
-        }
-    }*/
 
     async insertData(dto){
         const user = await database.USER.findOne({
