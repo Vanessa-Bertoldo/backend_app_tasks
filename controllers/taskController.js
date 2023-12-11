@@ -42,6 +42,16 @@ class TaskController{
         }
     }
 
+    static async getTasksByUserd(req, res){
+        const { id } = req.params
+        try{
+            const tasks = await tasksService.getDataTask(id)
+            res.status(200).json(tasks)
+        } catch(error) {
+            res.status(400).send({message: error.message})
+        }
+    }
+
     static async updateData(req, res){
         
     }

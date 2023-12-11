@@ -46,5 +46,18 @@ class TaskService{
             throw new Error("Erro ao buscar dados")
         }
     }
+
+    async getDataTask(id){
+        try{
+            const tasks = database.TASKS.findAll({
+                where: {
+                    user_id: id
+                }
+            })
+            return tasks
+        } catch(error) {
+            throw new Error("Erro ao buscar dados")
+        }
+    }
 }
 module.exports = TaskService
