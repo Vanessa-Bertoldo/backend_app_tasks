@@ -25,8 +25,8 @@ class TaskController{
     static async deleteData(req, res){
         const { id } = req.params
         try{
-            await tasksService.deleteTask(id)
-            res.status(200).json({message: "Sucesso"})
+            const tasks = await tasksService.deleteTask(id)
+            res.status(200).json({status: 200, data:tasks})
         } catch(error) {
             res.status(400).send({message: error.message})
         }
@@ -52,8 +52,15 @@ class TaskController{
         }
     }
 
-    static async updateData(req, res){
-        
+    static async updateStatus(req, res){
+        const { status, id } = req.body
+
+        try{
+            const task = await tasksService.updateStatus({ status, id })
+            res.status(200).json(task)
+        } catch(error) {
+            res.status(400).send({message: error.message})
+        }
     }
 }
 module.exports = TaskController

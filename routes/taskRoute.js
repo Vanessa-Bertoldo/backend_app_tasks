@@ -9,6 +9,6 @@ router
     .get('task/:id')
     .post('/task', TaskController.insertData)
     .delete('/task/:id', TaskController.deleteData)
-    .put('task/:id', TaskController.updateData)
+    .put('/task', TaskController.updateStatus)
 
 module.exports = router

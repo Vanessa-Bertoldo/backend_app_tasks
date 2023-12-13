@@ -16,7 +16,8 @@ class TaskService{
                 date_final:         dto.date_final,
                 user_id:            dto.user_id
             })
-            return newTask
+            const tasks = await this.getDataTasks()
+            return tasks
         } catch(error) {
             throw new Error("Erro ao cadastrar dados de tarefa")
         }
@@ -29,8 +30,11 @@ class TaskService{
                     id: id
                 }
             })
+
+            const tasks = await this.getDataTasks()
+            return tasks
         } catch(error) {
-            throw new Erro("Erro ao excluir dados de tarefa")
+            throw new Error(error)
         }
     }
 
@@ -57,6 +61,23 @@ class TaskService{
             return tasks
         } catch(error) {
             throw new Error("Erro ao buscar dados")
+        }
+    }
+
+    async updateStatus(dto){
+        const task =  await this.getDataById(dto.id)
+           
+           if(!task){
+            throw new Error("Tarefa informada não cadastrada")
+           }
+        try{
+            task.status = dto.status
+
+            await task.save()
+
+            return await task.reload()
+        } catch(error) {
+            throw new Error("Erro ao atualizar status de tarefa")
         }
     }
 }
