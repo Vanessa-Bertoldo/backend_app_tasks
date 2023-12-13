@@ -57,8 +57,18 @@ class TaskController{
 
         try{
             const task = await tasksService.updateStatus({ status, id })
-            res.status(200).json(task)
+            res.status(200).json({status: 200,data:task})
         } catch(error) {
+            res.status(400).send({message: error.message})
+        }
+    }
+
+    static async updateDataTasks(req, res){
+        const { id, title, description, status } = req.body
+        try{
+            const tasks = await tasksService.updateData({ id, title, description, status })
+            res.status(200).json({status: 200, data: tasks})
+        } catch(error){
             res.status(400).send({message: error.message})
         }
     }

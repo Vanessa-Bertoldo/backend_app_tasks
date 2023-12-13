@@ -67,17 +67,38 @@ class TaskService{
     async updateStatus(dto){
         const task =  await this.getDataById(dto.id)
            
-           if(!task){
+        if(!task){
             throw new Error("Tarefa informada não cadastrada")
-           }
+        }
         try{
             task.status = dto.status
 
             await task.save()
 
-            return await task.reload()
+            const tasks = await this.getDataTasks()
+            return tasks
         } catch(error) {
             throw new Error("Erro ao atualizar status de tarefa")
+        }
+    }
+
+    async updateData(dto){
+        const tasks = await this.getDataById(dto.id)
+
+        if(!tasks){
+            throw new Error("Tarefa informada não encontrada")
+        }
+        try{
+            tasks.title                 = dto.title
+            tasks.description           = dto.description
+            tasks.status                = dto.status
+            
+            await tasks.save()
+             
+            const getDataTask = await this.getDataTasks()
+            return getDataTask
+        } catch(error) {
+            throw new Error(error)
         }
     }
 }
