@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       date_initial: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       date_final: {
         type: Sequelize.DATE

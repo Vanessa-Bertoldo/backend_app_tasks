@@ -122,7 +122,7 @@ class TaskService{
             
             await tasks.save()
              
-            const getDataTask = await this.getDataTasks()
+            const getDataTask = await this.getDataByIdUser(tasks.user_id)
             return getDataTask
         } catch(error) {
             throw new Error(error)
