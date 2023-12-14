@@ -16,22 +16,49 @@ class TaskService{
                 date_final:         dto.date_final,
                 user_id:            dto.user_id
             })
-            const tasks = await this.getDataTasks()
+            const tasks = await database.TASKS.findAll({
+                where: {
+                    user_id: dto.user_id
+                }
+            })
             return tasks
         } catch(error) {
             throw new Error("Erro ao cadastrar dados de tarefa")
         }
     }
 
+    async getDataByIdUser(id){
+        try{
+            const tasks = await database.TASKS.findAll({
+                where: {
+                    user_id: id
+                }
+            })
+            return tasks
+        } catch(error){
+            throw new Error("Erro ao buscar dados")
+        }
+    }
+
     async deleteTask(id){
         try{
+            const task = await database.TASKS.findOne({
+                where: {
+                    id: id
+                }
+            })
+
+            if(!task){
+                throw new Error("Tarefa não encontrada no banco")
+            }
+
             await database.TASKS.destroy({
                 where: {
                     id: id
                 }
             })
 
-            const tasks = await this.getDataTasks()
+            const tasks = await this.getDataByIdUser(task.user_id)
             return tasks
         } catch(error) {
             throw new Error(error)

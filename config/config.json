@@ -1,12 +1,12 @@
 {
-  "test": {
+  "development": {
     "username": "vanessa",
     "password": "123",
     "database": "taskSyncHub",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "development": {
+  "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
